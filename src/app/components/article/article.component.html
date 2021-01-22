@@ -1,0 +1,18 @@
+<mat-card class="example-card">
+  <mat-card-content>
+    <div class="wrap-recipe">
+      <h2>Name article - {{ itemArticle?.title }}</h2>
+      <p><span class="article-subTitle">_id</span> {{ itemArticle?._id }}</p>
+      <p><span class="article-subTitle">text</span> {{ itemArticle?.text }}</p>
+      <p><span class="article-subTitle">categoryId</span> {{ itemArticle?.categoryId }}</p>
+      <p><span class="article-subTitle">createdAt</span> {{ itemArticle?.createdAt }}</p>
+      <p><span class="article-subTitle">updatedAt</span> {{ itemArticle?.updatedAt }}</p>
+      <p><span class="article-subTitle">description</span> {{ itemArticle?.description }}</p>
+      <p><span class="article-subTitle">isDeleted</span> {{ itemArticle?.isDeleted }}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>EDIT</button>
+    <button mat-button>DELETE</button>
+  </mat-card-actions>
+</mat-card>

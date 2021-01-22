@@ -1,0 +1,13 @@
+.wrap-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sidenav-menu {
+  width: 40%;
+}
+.wrap-router {
+  width: 60%;
+  padding: 10px 20px;
+}

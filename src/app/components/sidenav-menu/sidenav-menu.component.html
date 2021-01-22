@@ -1,0 +1,69 @@
+<div class="sidenav-menu">
+  <mat-card>
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+
+      <!--adding root categories-->
+      <mat-tree-node *matTreeNodeDef="let node; when: hasAddCategory">
+        <button mat-icon-button disabled></button>
+        <a class="sidenav-menu__linkAddCategory"
+           (click)="addRootItem()">{{node.title}}</a>
+        <button mat-icon-button (click)="addRootItem()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-tree-node>
+
+      <!--categories without children-->
+      <mat-tree-node *matTreeNodeDef="let node;" matTreeNodeToggle matTreeNodePadding>
+        <button mat-icon-button disabled></button>
+        <a [routerLink]="['/category', node._id]">{{node.title}}</a>
+        <button mat-icon-button (click)="addNewItem(node)">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="editItem(node)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteItem(node)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-tree-node>
+
+      <mat-tree-node style="display: none" *matTreeNodeDef="let node; when: hasDeleted"></mat-tree-node>
+
+      <!--input form Edit title-->
+      <mat-tree-node *matTreeNodeDef="let node; when: hasEdit" matTreeNodePadding>
+        <button mat-icon-button disabled></button>
+        <mat-form-field>
+          <input matInput #itemValue [value]="node.title" placeholder="Edit title...">
+        </mat-form-field>
+        <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+      </mat-tree-node>
+
+      <!--input form New item-->
+      <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+        <button mat-icon-button disabled></button>
+        <mat-form-field>
+          <input matInput #itemValue placeholder="New item...">
+        </mat-form-field>
+        <button mat-button (click)="saveNode(node, itemValue.value)">Save</button>
+      </mat-tree-node>
+
+      <!--categories with children-->
+      <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'toggle ' + node.filename">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <a [routerLink]="['/category', node._id]">{{node.title}}</a>
+        <button mat-icon-button (click)="addNewItem(node)">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="editItem(node)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-tree-node>
+
+    </mat-tree>
+  </mat-card>
+</div>
